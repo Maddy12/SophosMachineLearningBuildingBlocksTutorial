@@ -21,8 +21,8 @@ conda install numpy pandas baker sklearn mmh3 nltk matplotlib keras
 When using Spyder, either method works from a command prompt. 
 
 ### Running the Model
-To run the code, use 'python' then our function 'compare', the parameters you are changing prefixed with '--' and the value:
+To run the code, use 'python' then our function 'compare', the parameters you are changing prefixed with '--' and the value. The paramaters here are the filepath for which you have your "clean.csv" and "dirty.csv" stored and n is the number of urls and dirty urls you would like to run on. If the n chosen is larger than the amount of urls available, it will just use all. 
 ```
-python compare --filepath "<path where the data is stored>" --n 
+python urlmodel.py compare --filepath "<path where the data is stored>" --n 
 ```
-The results of the model will be stored in the filepath you pass. 
+The results of the model will be stored in the filepath you passed. 
