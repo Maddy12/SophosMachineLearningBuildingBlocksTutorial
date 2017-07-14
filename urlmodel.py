@@ -39,11 +39,14 @@ def get_data(filepath, n):
     
     log.info("Importing clean URLs")
     clean = pd.read_csv(os.path.join(filepath, "clean.csv"))
-    clean = clean.sample(n)
-
     log.info("Importing dirty URLs")
     dirty = pd.read_csv(os.path.join(filepath, "dirty.csv"))
+
+    if n > len(dirty):
+        n = len(dirty)
+    
     dirty = dirty.sample(n)
+    clean = clean.sample(n)
 
     clean['label'] = 0
     dirty['label'] = 1
