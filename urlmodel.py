@@ -38,23 +38,22 @@ def get_data(filepath, n):
     n = int(n)
     
     log.info("Importing clean URLs")
-    clean = pd.read_csv(os.path.join(filepath, "clean_uris.csv"))
+    clean = pd.read_csv(os.path.join(filepath, "clean.csv"))
     clean = clean.sample(n)
 
     log.info("Importing dirty URLs")
-    dirty = pd.read_csv(os.path.join(filepath, "dirty_uris.csv"))
+    dirty = pd.read_csv(os.path.join(filepath, "dirty.csv"))
     dirty = dirty.sample(n)
 
     clean['label'] = 0
     dirty['label'] = 1
-    dirty['day'] = dirty['Day']
     data = clean
     data = data.append(dirty)
     data = data.sample(frac=1).reset_index(drop=True)
 
     y_label = [np.array(data['label'].values)]
-    first_seen = data['day'].values
-    first_seen = [int((datetime.strptime(x, '%m/%d/%Y')- datetime(1970,1,1)).total_seconds()) for x in first_seen]
+    first_seen = data['first_seen'].values
+    first_seen = [int((datetime.strptime(x, '%Y-%m-%d %H:%M:%S')- datetime(1970,1,1)).total_seconds()) for x in first_seen]
 
     #now do the time split
     p_cut = 70.0
